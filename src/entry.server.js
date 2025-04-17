@@ -3,11 +3,12 @@ import { createApp } from './main'
 export default context => {
   return new Promise((resolve, reject) => {
     const app = createApp()
+    console.log("app:", app)
     const router = app.$router
     const store = app.$store
     const { url } = context
     const { fullPath } = router.resolve(url).route
-    if(fullPath !== url){
+    if (fullPath !== url) {
       return reject({
         url: fullPath
       })
@@ -17,7 +18,7 @@ export default context => {
 
     router.onReady(() => {
       const matchedComponents = router.getMatchedComponents()
-      if(!matchedComponents.length){
+      if (!matchedComponents.length) {
         return reject({
           code: 404
         })
